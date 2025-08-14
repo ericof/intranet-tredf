@@ -9,11 +9,24 @@
       destination="20250813001"
       >
     <genericsetup:upgradeDepends
-        title="Configura timezone para America/Sao_Paulo"
+        title="Altera timezone para America/Sao_Paulo"
         import_steps="plone.app.registry"
         />
   </genericsetup:upgradeSteps>
 
-  <!-- -*- extra stuff goes here -*- -->
+  <genericsetup:upgradeSteps
+      profile="tredf.intranet:default"
+      source="20250813001"
+      destination="20250814001"
+      >
+    <genericsetup:upgradeDepends
+        title="Fecha a intranet"
+        import_steps="workflow"
+        />
+    <upgradeStep
+        title="Atualiza o permissionamento com o novo workflow"
+        handler=".workflow.atualiza_permissoes"
+        />
+  </genericsetup:upgradeSteps>
 
 </configure>
