@@ -57,9 +57,10 @@ class IArea(model.Schema):
         description=_("Informe a cidade"),
         required=False,
     )
-    estado = schema.TextLine(
+    estado = schema.Choice(
         title=_("Estado"),
-        description=_("Informe o estado"),
+        description=_("Selecione o estado"),
+        vocabulary="tredf.intranet.vocabulary.estados",
         required=False,
     )
     cep = schema.TextLine(
