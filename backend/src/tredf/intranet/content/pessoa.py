@@ -1,10 +1,19 @@
 from plone.dexterity.content import Container
 from plone.supermodel import model
+from tredf.intranet import _
+from zope import schema
 from zope.interface import implementer
 
 
 class IPessoa(model.Schema):
     """Definição de uma Pessoa."""
+
+    cargo = schema.Choice(
+        title=_("Cargo"),
+        description=_("Selecione qual o cargo dessa pessoa no TRE-DF."),
+        vocabulary="tredf.intranet.vocabulary.cargos",
+        required=False,
+    )
 
 
 @implementer(IPessoa)
