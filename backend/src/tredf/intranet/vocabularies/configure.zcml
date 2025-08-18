@@ -10,6 +10,10 @@
       component=".cargos.vocab_cargos"
       />
 
+  <utility
+      name="tredf.intranet.vocabulary.areas"
+      component=".areas.vocab_areas"
+      />
   <!-- -*- extra stuff goes here -*- -->
 
 </configure>
