@@ -50,6 +50,8 @@ class TestArea:
             "plone.namefromtitle",
             "plone.shortname",
             "plone.excludefromnavigation",
+            "tredf.intranet.behavior.contato",
+            "tredf.intranet.behavior.endereco",
             "plone.versioning",
             "volto.blocks",
             "plone.constraintypes",
