@@ -71,4 +71,19 @@
         />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+      profile="tredf.intranet:default"
+      source="20250818002"
+      destination="20250819001"
+      >
+    <genericsetup:upgradeDepends
+        title="Adiciona indice para os campos Area e Cargo"
+        import_steps="catalog"
+        />
+    <upgradeStep
+        title="Reindexa o tipo Pessoa"
+        handler=".catalog.reindexa_pessoa"
+        />
+  </genericsetup:upgradeSteps>
+
 </configure>
