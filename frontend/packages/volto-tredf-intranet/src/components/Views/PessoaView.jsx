@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from '@plone/components';
 import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
 import Image from '@plone/volto/components/theme/Image/Image';
+import AreaInfo from '../AreaInfo/AreaInfo';
 import ContactInfo from '../ContactInfo/ContactInfo';
 import EnderecoInfo from '../EnderecoInfo/EnderecoInfo';
 
@@ -27,13 +28,13 @@ const PessoaView = (props) => {
         </span>
       )}
       <h1 className="documentFirstHeading">{content.title}</h1>
-      {content.area && (
-        <UniversalLink className={'area'} item={content.area}>
-          {content.area.title}
-        </UniversalLink>
-      )}
       {content.description && (
         <p className="documentDescription">{content.description}</p>
+      )}
+      {content.area && (
+        <UniversalLink className={'area'} item={content.area}>
+          <AreaInfo content={content.area} />
+        </UniversalLink>
       )}
       <EnderecoInfo content={content} />
       <ContactInfo content={content} />
