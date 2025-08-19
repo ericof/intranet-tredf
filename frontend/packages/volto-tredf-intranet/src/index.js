@@ -1,5 +1,6 @@
 import AreaView from './components/Views/AreaView';
 import PessoaView from './components/Views/PessoaView';
+import AreaGridItem from './components/Blocks/Grid/AreaGridItem';
 
 const applyConfig = (config) => {
   config.settings.isMultilingual = false;
@@ -25,6 +26,15 @@ const applyConfig = (config) => {
     Pessoa: PessoaView,
     ...config.views.contentTypesViews,
   };
+
+  // Blocos
+  /// Grid
+  config.registerComponent({
+    name: 'GridListingItemTemplate',
+    component: AreaGridItem,
+    dependencies: 'Area',
+  });
+
   return config;
 };
 
