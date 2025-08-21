@@ -32,9 +32,18 @@ class TestServiceClimaGet:
         self.portal = portal
         self.endpoint = "/@clima"
 
-    def test_get_status_code(self, manager_request):
+    def test_anonymous_does_not_have_access(self, anon_request):
+        response = anon_request.get(self.endpoint)
+        assert response.status_code == 401
+
+    def test_manager_has_access(self, manager_request):
         response = manager_request.get(self.endpoint)
         assert response.status_code == 200
+
+    def test_only_on_site_root(self, manager_request):
+        endpoint = f"/documento{self.endpoint}"
+        response = manager_request.get(endpoint)
+        assert response.status_code == 404
 
     @pytest.mark.parametrize(
         "key,expected",

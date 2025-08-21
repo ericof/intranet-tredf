@@ -1,8 +1,11 @@
+from plone import api
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.restapi.testing import RelativeSession
+from zope.component.hooks import site
 
 import pytest
+import transaction
 
 
 @pytest.fixture()
@@ -36,4 +39,13 @@ def manager_request(request_factory):
 @pytest.fixture
 def portal(functional):
     """Fixture de pytest que cria e retorna um portal Plone."""
-    return functional["portal"]
+    portal = functional["portal"]
+    with site(portal), api.env.adopt_roles(["Manager"]):
+        api.content.create(
+            type="Document",
+            id="documento",
+            title="Exemplo de documento",
+            container=portal,
+        )
+        transaction.commit()
+    return portal
