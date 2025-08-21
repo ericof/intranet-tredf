@@ -10,7 +10,7 @@ const ClimaEdit = (props) => {
 
   return (
     <>
-      <View {...props} />
+      <View {...props} isEditMode={true} />
       <SidebarPortal selected={selected}>
         <BlockDataForm
           schema={schema}

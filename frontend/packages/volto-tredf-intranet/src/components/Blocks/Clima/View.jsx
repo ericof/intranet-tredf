@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ClimaView = (props) => {
-  const { data } = props;
+  const { data, isEditMode } = props;
   // Pointer para o local com os dados
   const previsao = {
     events: {
@@ -27,7 +27,7 @@ const ClimaView = (props) => {
   const location = data?.location ? data.location : 'Terra';
 
   return (
-    <div className={'block climaBlock'}>
+    <div className={`block climaBlock ${isEditMode ? 'edit' : ''}`}>
       <div className={'clima-wrapper'}>
         <div className={'clima-card'}>
           <div className={`clima-icon ${weather}`}></div>
