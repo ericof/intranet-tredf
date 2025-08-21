@@ -1,19 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getClimaData } from '../../../actions/Clima/Clima';
 
 const ClimaView = (props) => {
   const { data, isEditMode } = props;
   // Pointer para o local com os dados
-  const previsao = {
-    events: {
-      sunrise: '08:00',
-      sunset: '18:00',
-    },
-    temperature: {
-      hourly: [],
-      now: 29.1,
-    },
-    weather: 'sun',
-  };
+  const loaded = useSelector((state) => state.climaData?.loaded || false);
+  const previsao = useSelector((state) => state.climaData?.data || {});
+
   // Dados da previsao
   const events = previsao?.events;
   const sunrise = events?.sunrise ? events.sunrise : '';
@@ -26,21 +20,32 @@ const ClimaView = (props) => {
   const measure = data?.measure ? data.measure : '';
   const location = data?.location ? data.location : 'Terra';
 
+  const dispatch = useDispatch();
+
+  // Busca os dados quando o bloco é renderizado
+  useEffect(() => {
+    dispatch(getClimaData(location));
+  }, [dispatch, location]);
+
   return (
     <div className={`block climaBlock ${isEditMode ? 'edit' : ''}`}>
       <div className={'clima-wrapper'}>
-        <div className={'clima-card'}>
-          <div className={`clima-icon ${weather}`}></div>
-          <h1>{temperature}º</h1>
-          <p className={'local'}>{location}</p>
-          <p className={`evento ${measure}`}>
-            {measure === 'sunrise' ? (
-              <span>{sunrise}</span>
-            ) : (
-              <span>{sunset}</span>
-            )}
-          </p>
-        </div>
+        {loaded ? (
+          <div className={'clima-card'}>
+            <div className={`clima-icon ${weather}`}></div>
+            <h1>{temperature}º</h1>
+            <p className={'local'}>{location}</p>
+            <p className={`evento ${measure}`}>
+              {measure === 'sunrise' ? (
+                <span>{sunrise}</span>
+              ) : (
+                <span>{sunset}</span>
+              )}
+            </p>
+          </div>
+        ) : (
+          <div className={'loading'}>{'Aguarde...'}</div>
+        )}
       </div>
     </div>
   );

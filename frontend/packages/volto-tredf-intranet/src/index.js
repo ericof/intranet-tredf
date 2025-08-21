@@ -10,6 +10,9 @@ import ClimaEdit from './components/Blocks/Clima/Edit';
 import ClimaView from './components/Blocks/Clima/View';
 import climaSVG from '@plone/volto/icons/cloud.svg';
 
+// reducers
+import { climaData } from './reducers/climaData';
+
 const applyConfig = (config) => {
   config.settings.isMultilingual = false;
   config.settings.supportedLanguages = ['pt-br'];
@@ -82,6 +85,12 @@ const applyConfig = (config) => {
       });
     }
   });
+
+  // reducers
+  config.addonReducers = {
+    ...config.addonReducers,
+    climaData,
+  };
 
   return config;
 };
